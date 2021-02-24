@@ -7,14 +7,16 @@
     <title>Range</title>
 
     <link href="./node_modules/axentix/dist/css/axentix.min.css" rel="stylesheet" />
-    <link href="./style.css" rel="stylesheet" />
     <link href="./node_modules/nouislider/distribute/nouislider.min.css" rel="stylesheet" />
+    <link href="./style.css" rel="stylesheet" />
   </head>
 
   <body class="layout">
     <header>
       <nav class="navbar shadow-1 airforce dark-4">
-        <button class="btn rounded-1 white hide-md-up sidenav-trigger small mr-2" data-target="main-sidenav">Menu</button>
+        <button class="btn rounded-1 white hide-md-up sidenav-trigger small mr-2" data-target="main-sidenav">
+          Menu
+        </button>
         <a href="#" target="_blank" class="navbar-brand">Axentix</a>
         <div class="navbar-menu ml-auto">
           <a class="navbar-link" href="#">Not a link</a>
@@ -32,7 +34,7 @@
       <h1 class="txt-center font-w300 mx-2">Range slider</h1>
 
       <div class="container mt-5">
-        <div id="range" class="txt-blue txt-dark-2"></div>
+        <div id="range" class="range-axentix"></div>
       </div>
     </main>
 
@@ -40,16 +42,13 @@
 
     <script src="./node_modules/axentix/dist/js/axentix.min.js"></script>
     <script src="./node_modules/nouislider/distribute/nouislider.min.js"></script>
+    <script src="./script.js"></script>
     <script>
-      let slider = document.getElementById('range');
-
-      noUiSlider.cssClasses.target += ' range-axentix';
-
-      noUiSlider.create(slider, {
+      const axRange = new Axentix.Range('#range', {
         connect: true,
         tooltips: true,
         range: {
-          min: [0],
+          min: 0,
           '10%': [10, 10],
           '50%': [80, 50],
           '80%': 150,
@@ -61,7 +60,6 @@
           stepped: true,
           density: 10,
           values: 5,
-          //values: 5,
         },
       });
     </script>

@@ -15,7 +15,7 @@ To install any component, use `npm i @axentix/plugin-{pluginName}`
 
     - Plugin develop branch
       - Branch name: plugin/{pluginName}
-      - Commit name: {pluginName}: {commit}
+      - Commit name: [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
   - Pull requests
     - Create a pull request on master with a conventional title

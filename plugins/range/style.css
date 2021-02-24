@@ -10,15 +10,15 @@
 }
 
 .range-axentix .noUi-connect {
-  background: currentColor !important;
+  background: currentColor;
 }
 
 .range-axentix .noUi-handle {
   background: var(--handle-color);
-  width: 20px !important;
-  height: 20px !important;
-  top: -6px !important;
-  right: -10px !important;
+  width: 20px;
+  height: 20px;
+  top: -6px;
+  right: -10px;
   border-radius: 50%;
   outline: none;
   border: none;

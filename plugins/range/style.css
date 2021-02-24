@@ -17,12 +17,12 @@
   background: var(--handle-color);
   width: 20px !important;
   height: 20px !important;
-  right: -17px !important;
   top: -6px !important;
+  right: -10px !important;
   border-radius: 50%;
   outline: none;
   border: none;
-  box-shadow: 1px 1px 1px grey;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%), 0 2px 5px 2px rgb(0 0 0 / 6%);
 }
 
 .range-axentix .noUi-handle::after,

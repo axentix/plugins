@@ -1,0 +1,15 @@
+{
+  "name": "@axentix/plugin-range",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axentix": "^1.1.0",
+    "nouislider": "^14.6.3"
+  }
+}

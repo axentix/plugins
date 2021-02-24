@@ -1,0 +1,31 @@
+.range-axentix {
+  --vertical-range-width: 10px;
+  --horizontal-range-height: 10px;
+  --handle-color: white;
+  line-height: 1.75;
+}
+
+.range-axentix.noUi-horizontal {
+  height: var(--horizontal-range-height);
+}
+
+.range-axentix .noUi-connect {
+  background: currentColor !important;
+}
+
+.range-axentix .noUi-handle {
+  background: var(--handle-color);
+  width: 20px !important;
+  height: 20px !important;
+  right: -17px !important;
+  top: -6px !important;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  box-shadow: 1px 1px 1px grey;
+}
+
+.range-axentix .noUi-handle::after,
+.range-axentix .noUi-handle::before {
+  content: none;
+}

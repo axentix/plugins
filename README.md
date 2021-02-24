@@ -1,25 +1,40 @@
-# plugins
+# Plugins
 
-## What is a plugin ?
+## Plugin definition
 
-plugin => adapted already existing plugin / created from scratch
+A plugin can entirely be created from scratch, or imported and adaptated from an open-source component already existing. 
 
 ## Install
-- npm i @axentix/plugin-{name}
+
+Every validated component will be published on NPM.
+To install any component, use `npm i @axentix/plugin-{pluginName}`
 
 ## Git
-master = published / validated packages
+  - Branches
+    - Master branch : this branch refers all the verified plugins
 
-plugin/{name} = dev plugin | {name}: {commit}  
+    - Plugin develop branch
+      - Branch name: plugin/{pluginName}
+      - Commit name: {pluginName}: {commit}
 
-PR master => (valid test) => convention title | {name}: {pr} | 1 reviewer => auto publish 
+  - Pull requests
+    - Create a pull request on master with a conventional title
+    - PR name : {pluginName}: {pullRequest}
+    - Add Stallos and/or Xelzs as reviewer(s)
+    - When verified, the PR will be merged, and your plugin automatically published on NPM
 
 ## Code
-js ~
 
-css => .{name}-
+In order to not have conflict with other plugins, we need specific rules on class names.
+
+  - CSS/SCSS
+    - Class name: `.{pluginName}-{className}`
+
+  - JavaScript
+    - 
 
 ## Starter
-no mandatory
 
-package.json => compil scss / js automatic
+Using a starter template isn't mandatory, but recommended.
+
+We provide a package.json to automatically compile your JS and SCSS.

@@ -7,7 +7,10 @@ A plugin can entirely be created from scratch, or imported and adaptated from an
 ## Install
 
 Every validated component will be published on NPM.
-To install any component, use `npm i @axentix/plugin-{pluginName}`
+To install any component, use 
+```sh
+npm install @axentix/plugin-{pluginName}
+```
 
 ## Git
   - Branches

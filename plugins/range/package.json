@@ -13,6 +13,7 @@
     "nouislider": "^14.6.3"
   },
   "ax-plugins": {
-    "path": "range"
+    "name": "Range",
+    "cdn": true
   }
 }

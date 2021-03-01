@@ -20,6 +20,7 @@ jobs:
         run: |
           githubjson=`cat $GITHUB_EVENT_PATH`
           PRTitle=`echo $(jq -r '.pull_request.title' <<< "$githubjson")`
+          echo (${PRTitle//:/ })
           echo "::set-output name=pr-plugin-name::(${PRTitle//:/ })"
       - id: package-json-content
         name: get package.json content
@@ -33,7 +34,7 @@ jobs:
       - name: extracted informations
         run: |
           json=${{fromJson(steps.package-json-content.outputs.content)}}
-          echo "Plugin name: ${json.ax-plugins.name}"
+          echo "Plugin name: ${json}.ax-plugins.name"
           echo "Npm name: ${json}.name"
           echo "Version: ${json}.version"
           echo "Description: ${json}.description"

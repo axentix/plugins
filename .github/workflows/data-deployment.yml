@@ -35,20 +35,29 @@ jobs:
       - name: extracted informations
         run: |
           echo "Plugin name: ${{fromJson(steps.package-json-content.outputs.content).ax-plugins.name}}"
-          echo "Npm name: ${{fromJson(steps.package-json-content.outputs.content).name}}"
+          echo "Npm: ${{fromJson(steps.package-json-content.outputs.content).name}}"
           echo "Version: ${{fromJson(steps.package-json-content.outputs.content).version}}"
           echo "Description: ${{fromJson(steps.package-json-content.outputs.content).description}}"
           echo "Author: ${{fromJson(steps.package-json-content.outputs.content).author}}"
-          echo "Use CDN: ${{fromJson(steps.package-json-content.outputs.content).ax-plugins.build == true}}"
+          echo "Build ?: ${{fromJson(steps.package-json-content.outputs.content).ax-plugins.build == true}}"
 
   deploy:
     runs-on: ubuntu-latest
     needs: data
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
+    working-directory: ./plugins/${{needs.data.outputs.plugin-name}}
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          registry-url: 'https://registry.npmjs.org'
       - name: build
         if: ${{fromJson(needs.data.outputs.package-content).ax-plugins.build == true}}
-        working-directory: ./plugins/${{needs.data.outputs.plugin-name}}
         run: |
-          npm install
+          npm ci
           npm run build
+      # - name: publish
+      #   run: npm publish --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

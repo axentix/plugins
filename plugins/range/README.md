@@ -23,6 +23,6 @@ https://refreshless.com/nouislider/slider-options/
 ## Supported Axentix features
 
   - [ ] Data init
-  - [ ] `sync()`
-  - [ ] `reset()`
-  - [ ] `destroy()`
+  - [x] `sync()`
+  - [x] `reset()`
+  - [x] `destroy()`

@@ -35,19 +35,19 @@ jobs:
       - name: extracted informations
         run: |
           json=${{fromJson(steps.package-json-content.outputs.content)}}
-          echo "Plugin name: ${json}.ax-plugins.name"
-          echo "Npm name: ${json}.name"
-          echo "Version: ${json}.version"
-          echo "Description: ${json}.description"
-          echo "Author: ${json}.author"
-          echo "Use CDN: ${json}.ax-plugins.cdn"
+          echo "Plugin name: ${json.ax-plugins.name}"
+          echo "Npm name: ${json.name}"
+          echo "Version: ${json.version}"
+          echo "Description: ${json.description}"
+          echo "Author: ${json.author}"
+          echo "Use CDN: ${json.ax-plugins.cdn}"
 
   deploy:
     runs-on: ubuntu-latest
     needs: data
     steps:
       - name: build
-        if: github.event.pull_request.merged == true && fromJson(needs.data.outputs.package-content).ax-plugins.build == true
+        if: github.event.pull_request.merged == true && ${{fromJson(needs.data.outputs.package-content).ax-plugins.build}} == true
         working-directory: ./plugins/${{needs.data.outputs.plugin-name}}
         run: |
           npm install

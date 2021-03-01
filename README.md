@@ -4,6 +4,8 @@
 
 A plugin can entirely be created from scratch, or imported and adaptated from an open-source component already existing. 
 
+Here is the plugins documentation page :
+https://useaxentix.com/docs/plugins
 ## Install
 
 Every validated component will be published on NPM.

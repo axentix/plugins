@@ -33,12 +33,12 @@ jobs:
       - name: extracted informations
         run: |
           json=${{fromJson(steps.package-json-content.outputs.content)}}
-          echo "Plugin name: ${{json.ax-plugins.name}}"
-          echo "Npm name: ${{json.name}}"
-          echo "Version: ${{json.version}}"
-          echo "Description: ${{json.description}}"
-          echo "Author: ${{json.author}}"
-          echo "Use CDN: ${{json.ax-plugins.cdn}}"
+          echo "Plugin name: ${json.ax-plugins.name}"
+          echo "Npm name: ${json}.name"
+          echo "Version: ${json}.version"
+          echo "Description: ${json}.description"
+          echo "Author: ${json}.author"
+          echo "Use CDN: ${json}.ax-plugins.cdn"
 
   deploy:
     runs-on: ubuntu-latest

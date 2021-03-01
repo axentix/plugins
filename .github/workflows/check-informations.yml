@@ -5,8 +5,8 @@ on:
   pull_request:
     branches:
     - master
-    paths:
-    - 'plugins/**'
+    # paths:
+    # - 'plugins/**'
 
 jobs:
   run:

@@ -20,8 +20,8 @@ jobs:
         run: |
           githubjson=`cat $GITHUB_EVENT_PATH`
           PRTitle=`echo $(jq -r '.pull_request.title' <<< "$githubjson")`
-          echo (${PRTitle//:/ })
-          echo "::set-output name=pr-plugin-name::(${PRTitle//:/ })"
+          PRTitle=(${PRTitle//:/ })
+          echo "::set-output name=pr-plugin-name::${PRTitle[0]})"
       - id: package-json-content
         name: get package.json content
         working-directory: ./plugins/${{steps.pr-title.outputs.pr-plugin-name}}

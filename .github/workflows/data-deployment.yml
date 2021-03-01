@@ -39,14 +39,14 @@ jobs:
           echo "Version: ${{fromJson(steps.package-json-content.outputs.content).version}}"
           echo "Description: ${{fromJson(steps.package-json-content.outputs.content).description}}"
           echo "Author: ${{fromJson(steps.package-json-content.outputs.content).author}}"
-          echo "Use CDN: ${{fromJson(steps.package-json-content.outputs.content).ax-plugins.cdn}}"
+          echo "Use CDN: ${{fromJson(steps.package-json-content.outputs.content).ax-plugins.cdn == true}}"
 
   deploy:
     runs-on: ubuntu-latest
     needs: data
     steps:
       - name: build
-        if: github.event.pull_request.merged == true && ${{fromJson(needs.data.outputs.package-content).ax-plugins.build}} == true
+        if: github.event.pull_request.merged == true && ${{fromJson(needs.data.outputs.package-content).ax-plugins.build == true}}
         working-directory: ./plugins/${{needs.data.outputs.plugin-name}}
         run: |
           npm install

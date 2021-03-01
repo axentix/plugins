@@ -8,6 +8,10 @@ on:
     paths:
     - 'plugins/**'
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   data:
     runs-on: ubuntu-latest

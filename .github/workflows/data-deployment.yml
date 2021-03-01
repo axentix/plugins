@@ -1,16 +1,19 @@
 ---
-name: check informations
+name: data-deployment
 
 on:
   pull_request:
     branches:
     - master
-    # paths:
-    # - 'plugins/**'
+    paths:
+    - 'plugins/**'
 
 jobs:
-  run:
+  data:
     runs-on: ubuntu-latest
+    outputs:
+      plugin-name: ${{ steps.pr-title.outputs.pr-plugin-name }}
+      package-content: ${{ steps.package-json-content.outputs.content }}
     steps:
       - id: pr-title
         name: fetch plugin name from pr title
@@ -36,3 +39,14 @@ jobs:
           echo "Description: ${{json.description}}"
           echo "Author: ${{json.author}}"
           echo "Use CDN: ${{json.ax-plugins.cdn}}"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: data
+    steps:
+      - name: build
+        if: github.event.pull_request.merged == true && fromJson(needs.data.outputs.package-content).ax-plugins.build == true
+        working-directory: ./plugins/${{needs.data.outputs.plugin-name}}
+        run: |
+          npm install
+          npm run build

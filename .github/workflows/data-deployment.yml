@@ -15,19 +15,20 @@ jobs:
       plugin-name: ${{ steps.pr-title.outputs.pr-plugin-name }}
       package-content: ${{ steps.package-json-content.outputs.content }}
     steps:
+      - uses: actions/checkout@v2
       - id: pr-title
         name: fetch plugin name from pr title
         run: |
           githubjson=`cat $GITHUB_EVENT_PATH`
           PRTitle=`echo $(jq -r '.pull_request.title' <<< "$githubjson")`
           PRTitle=(${PRTitle//:/ })
-          echo ${PRTitle}
           echo "::set-output name=pr-plugin-name::${PRTitle[0]})"
       - id: package-json-content
         name: get package.json content
         working-directory: ./plugins/${{steps.pr-title.outputs.pr-plugin-name}}
         run: |
-          content=`cat ./package.json`
+          pwd
+          content=`cat package.json`
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"

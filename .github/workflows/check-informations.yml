@@ -1,0 +1,38 @@
+---
+name: check informations
+
+on:
+  pull_request:
+    branches:
+    - master
+    # paths:
+    # - 'plugins/**'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - id: pr-title
+        name: fetch plugin name from pr title
+        run: |
+          githubjson=`cat $GITHUB_EVENT_PATH`
+          PRTitle=`echo $(jq -r '.pull_request.title' <<< "$githubjson")`
+          echo "::set-output name=pr-plugin-name::(${PRTitle//:/ })"
+      - id: package-json-content
+        name: get package.json content
+        working-directory: ./plugins/${{steps.pr-title.outputs.pr-plugin-name}}
+        run: |
+          content=`cat ./package.json`
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "::set-output name=content::$content"
+      - name: extracted informations
+        run: |
+          json=${{fromJson(steps.package-json-content.outputs.content)}}
+          echo "Plugin name: ${{json.ax-plugins.name}}"
+          echo "Npm name: ${{json.name}}"
+          echo "Version: ${{json.version}}"
+          echo "Description: ${{json.description}}"
+          echo "Author: ${{json.author}}"
+          echo "Use CDN: ${{json.ax-plugins.cdn}}"

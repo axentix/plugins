@@ -31,7 +31,8 @@ jobs:
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
-          content=`echo $($content | jq '.ax-plugins += {path: "plugins/${{steps.pr-title.outputs.pr-plugin-name}}"}')`
+          content=`echo $($content | jq '.ax-plugins += {path: \"plugins/${{steps.pr-title.outputs.pr-plugin-name}}\"}')`
+          echo $content
           echo "::set-output name=content::$content"
       - name: extracted informations
         run: |
@@ -64,8 +65,6 @@ jobs:
       #   run: npm publish --access public
       #   env:
       #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Debug package json
-        run: echo ${{needs.data.outputs.package-content}}
       - name: Update Axentix plugin list
         uses: joelwmale/webhook-action@fd99bb3b8272237103e349e9bb4d9b0ead9a217c
         with:

@@ -28,10 +28,10 @@ jobs:
         working-directory: ./plugins/${{steps.pr-title.outputs.pr-plugin-name}}
         run: |
           content=`cat package.json`
+          content=`echo $($content | jq '.ax-plugins.path = \"plugins/${{steps.pr-title.outputs.pr-plugin-name}}\"')`
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
-          content=`echo $($content | jq '.ax-plugins += {path: \"plugins/${{steps.pr-title.outputs.pr-plugin-name}}\"}')`
           echo $content
           echo "::set-output name=content::$content"
       - name: extracted informations

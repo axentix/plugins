@@ -1,0 +1,72 @@
+---
+name: data-deployment
+
+on:
+  pull_request:
+    branches:
+    - master
+    paths:
+    - 'plugins/**'
+
+jobs:
+  data:
+    runs-on: ubuntu-latest
+    outputs:
+      plugin-name: ${{ steps.pr-title.outputs.pr-plugin-name }}
+      package-content: ${{ steps.package-json-content.outputs.content }}
+    steps:
+      - uses: actions/checkout@v2
+      - id: pr-title
+        name: fetch plugin name from pr title
+        run: |
+          githubjson=`cat $GITHUB_EVENT_PATH`
+          PRTitle=`echo $(jq -r '.pull_request.title' <<< "$githubjson")`
+          PRTitle=(${PRTitle//:/ })
+          echo "::set-output name=pr-plugin-name::${PRTitle}"
+      - id: package-json-content
+        name: get package.json content
+        working-directory: ./plugins/${{steps.pr-title.outputs.pr-plugin-name}}
+        run: |
+          content=`cat package.json`
+          content=`echo $content | jq '.["ax-plugins"].path = "plugins/${{steps.pr-title.outputs.pr-plugin-name}}"'`
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "::set-output name=content::$content"
+      - name: extracted informations
+        run: |
+          echo "Plugin name: ${{fromJson(steps.package-json-content.outputs.content).ax-plugins.name}}"
+          echo "Npm: ${{fromJson(steps.package-json-content.outputs.content).name}}"
+          echo "Version: ${{fromJson(steps.package-json-content.outputs.content).version}}"
+          echo "Description: ${{fromJson(steps.package-json-content.outputs.content).description}}"
+          echo "Author: ${{fromJson(steps.package-json-content.outputs.content).author}}"
+          echo "Build: ${{fromJson(steps.package-json-content.outputs.content).ax-plugins.build == true}}"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: data
+    if: github.event.pull_request.merged == true
+    defaults:
+      run:
+        working-directory: ./plugins/${{needs.data.outputs.plugin-name}}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          registry-url: 'https://registry.npmjs.org'
+      - name: build
+        if: ${{fromJson(needs.data.outputs.package-content).ax-plugins.build == true}}
+        run: |
+          npm ci
+          npm run build
+      - name: publish
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Update Axentix plugin list
+        uses: joelwmale/webhook-action@fd99bb3b8272237103e349e9bb4d9b0ead9a217c
+        with:
+          url: ${{secrets.WEBHOOK_URL}}
+          headers: '{"AxentixToken": "${{secrets.AXENTIX_TOKEN}}"}'
+          body: ${{needs.data.outputs.package-content}}

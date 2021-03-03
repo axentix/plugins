@@ -1,0 +1,20 @@
+{
+  "name": "@axentix/plugin-range",
+  "version": "1.0.0",
+  "description": "Range slider based on noUiSlider implemented in Axentix as a plugin.",
+  "main": "script.js",
+  "style": "style.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Axentix Team",
+  "license": "MIT",
+  "dependencies": {
+    "axentix": "^1.1.0",
+    "nouislider": "^14.6.3"
+  },
+  "ax-plugins": {
+    "name": "Range",
+    "build": false
+  }
+}

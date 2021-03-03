@@ -32,7 +32,6 @@ jobs:
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
-          echo $content
           echo "::set-output name=content::$content"
       - name: extracted informations
         run: |
@@ -41,7 +40,7 @@ jobs:
           echo "Version: ${{fromJson(steps.package-json-content.outputs.content).version}}"
           echo "Description: ${{fromJson(steps.package-json-content.outputs.content).description}}"
           echo "Author: ${{fromJson(steps.package-json-content.outputs.content).author}}"
-          echo "Build ?: ${{fromJson(steps.package-json-content.outputs.content).ax-plugins.build == true}}"
+          echo "Build: ${{fromJson(steps.package-json-content.outputs.content).ax-plugins.build == true}}"
 
   deploy:
     runs-on: ubuntu-latest
@@ -64,9 +63,10 @@ jobs:
       # - name: publish
       #   run: npm publish --access public
       #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #     NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Update Axentix plugin list
         uses: joelwmale/webhook-action@fd99bb3b8272237103e349e9bb4d9b0ead9a217c
         with:
-          url: ${{ secrets.WEBHOOK_URL }}
+          url: ${{secrets.WEBHOOK_URL}}
+          headers: '{"AxentixToken": "${{secrets.AXENTIX_TOKEN}}"}'
           body: ${{needs.data.outputs.package-content}}

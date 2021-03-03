@@ -45,7 +45,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: data
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     defaults:
       run:
         working-directory: ./plugins/${{needs.data.outputs.plugin-name}}
@@ -60,10 +60,10 @@ jobs:
         run: |
           npm ci
           npm run build
-      # - name: publish
-      #   run: npm publish --access public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: publish
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Update Axentix plugin list
         uses: joelwmale/webhook-action@fd99bb3b8272237103e349e9bb4d9b0ead9a217c
         with:

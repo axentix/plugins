@@ -5,6 +5,7 @@ on:
   pull_request:
     branches:
     - master
+    types: [opened, closed, synchronize, reopened, edited]
     paths:
     - 'plugins/**'
 

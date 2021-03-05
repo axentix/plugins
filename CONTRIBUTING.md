@@ -27,6 +27,7 @@ In order to not have conflict with other plugins, we need specific rules on clas
 
 More informations on how to register a plugin :  
 https://useaxentix.com/docs/plugins
+
 ## Starter
 
 Using a starter template isn't mandatory, but recommended.

@@ -2,17 +2,31 @@
   "name": "@axentix/plugin-name",
   "version": "1.0.0",
   "description": "The description",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "The author",
-  "license": "MIT",
-  "dependencies": {
-    "axentix": "^1.1.0"
-  },
   "ax-plugins": {
     "name": "PluginName",
     "build": true
+  },
+  "scripts": {},
+  "license": "MIT",
+  "style": "style.css",
+  "sass": "",
+  "main": "script.js",
+  "module": "",
+  "typings": "",
+  "keywords": [
+    "axentix",
+    "framework",
+    "front-end",
+    "responsive",
+    "css",
+    "js",
+    "sass",
+    "web",
+    "axentix-plugins",
+    "plugins"
+  ],
+  "dependencies": {
+    "axentix": "^1.1.0"
   }
 }

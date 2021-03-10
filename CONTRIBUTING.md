@@ -25,7 +25,22 @@ In order to not have conflict with other plugins, we need specific rules on clas
     - The plugin class have to extend AxentixComponent
     - Use the Axentix.Config.registerPlugin method to register your plugin in Axentix
 
-More informations on how to register a plugin :  
+  - Register function parameters :
+```js
+Axentix.Config.registerPlugin({
+  class: {ClassName},
+  name:  {PluginName} (string),
+  dataDetection: (boolean),
+  author: {authorName} (string),
+  autoInit: {
+    enabled: (boolean),
+    selector: '.{componentName}-axentix:not(.no-axentix-init)',
+  },
+  description: {pluginDescription} (string),
+});
+```
+
+More informations about plugin :  
 https://useaxentix.com/docs/plugins
 
 ## Starter

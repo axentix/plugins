@@ -1,0 +1,32 @@
+{
+  "name": "@axentix/plugin-name",
+  "version": "1.0.0",
+  "description": "The description",
+  "author": "The author",
+  "ax-plugins": {
+    "name": "PluginName",
+    "build": true
+  },
+  "scripts": {},
+  "license": "MIT",
+  "style": "style.css",
+  "sass": "",
+  "main": "script.js",
+  "module": "",
+  "typings": "",
+  "keywords": [
+    "axentix",
+    "framework",
+    "front-end",
+    "responsive",
+    "css",
+    "js",
+    "sass",
+    "web",
+    "axentix-plugins",
+    "plugins"
+  ],
+  "dependencies": {
+    "axentix": "^1.1.0"
+  }
+}

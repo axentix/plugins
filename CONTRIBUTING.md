@@ -76,6 +76,20 @@ https://useaxentix.com/docs/plugins
 
 ## Starter
 
-The starter template allows you to compile your CSS & JS in one file, and your SASS/SCSS to CSS.
+The starter template allows you to **compile your CSS & JS** in one file, and your SASS/SCSS to CSS.
 
-Using a starter template isn't mandatory, but recommended since you'll have to create a package.json with all things that are inside the example one.
+Using a starter template isn't mandatory, but **recommended** since you'll have to create a package.json with **all things** that are inside the example one.
+
+Using the starter template, you have to use **this schema** :
+
+```
+├─┬ examples
+│ ├── index.html
+│
+├─┬ src
+  ├─┬ scss
+  │ ├─ {PluginName}.scss
+  │
+  ├─┬ js
+    ├─ script.js
+```

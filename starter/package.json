@@ -7,7 +7,15 @@
     "name": "PluginName",
     "build": true
   },
-  "scripts": {},
+  "scripts": {
+    "build:js": "gulp js",
+    "build:js-min": "gulp jsmin",
+    "build:js-esm": "gulp jsesm",
+    "build:sass-min": "gulp sassmin",
+    "build:sass": "gulp sass",
+    "build": "gulp",
+    "watch": "npm run build && gulp watch"
+  },
   "license": "MIT",
   "style": "style.css",
   "sass": "",
@@ -28,5 +36,22 @@
   ],
   "dependencies": {
     "axentix": "^1.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "@xelzs/code-size": "^1.1.0",
+    "browser-sync": "^2.26.13",
+    "fibers": "^4.0.3",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-babel-minify": "^0.5.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-deporder": "^1.2.0",
+    "gulp-insert": "^0.5.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.1.0",
+    "sass": "^1.32.8"
   }
 }

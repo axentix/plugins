@@ -8,8 +8,8 @@ const { src, dest, watch, series, parallel } = require('gulp'),
   autoprefixer = require('gulp-autoprefixer'),
   insert = require('gulp-insert'),
   deporder = require('gulp-deporder'),
-  packageJson = require('./package.json');
-Fiber = require('fibers');
+  packageJson = require('./package.json'),
+  Fiber = require('fibers');
 
 sass.compiler = require('sass');
 
